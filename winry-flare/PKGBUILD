@@ -1,0 +1,24 @@
+# Maintainer: Joshua Strot <joshua@winrylinux.org>
+
+pkgname=winry-flare
+pkgver=0.1
+pkgrel=1
+pkgdesc="Lightweight program to display some ascii art and basic system info"
+arch=('any')
+url="https://github.com/winry-linux/${pkgname}"
+license=('GPL')
+depends=('python')
+makedepends=('')
+source=("https://github.com/winry-linux/${pkgname}/archive/v${pkgver}.tar.gz")
+sha256sums=('ba0e186e5b1b2c15fcb286779321eafdb6a5d84d4d0c8339f1d8259e1f5bfae2')
+
+package() {
+  mkdir -p ${pkgdir}/usr/bin
+
+  msg "Copying data over winry-flare executable."
+  cp -r ${srcdir}/winry-flare-${pkgver}/winry-flare ${pkgdir}/usr/bin
+
+  msg "Making executable"
+  chmod +x ${pkgdir}/usr/bin/winry-flare
+}
+ 
