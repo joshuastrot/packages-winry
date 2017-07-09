@@ -1,0 +1,23 @@
+# Maintainer : Joshua Strot <joshua@winrylinux.org>
+
+pkgname=winry-system
+pkgver=0.1
+pkgrel=2
+pkgdesc="Winry Linux System update scriptlets and alpm hooks"
+arch=('any')
+url="https://winrylinux.org"
+license=('GPL')
+depends=('pacman')
+optdepends=('haveged: entropy harvesting daemon')
+source=("https://github.com/winry-linux/${pkgname}/archive/master.tar.gz")
+sha256sums=('84aabd7ed11f0f7635c9b5709ba9bad7069677a9aa52954d07df5dc2378fd4a6')
+
+build() {
+    cd "${srcdir}/${pkgname}-master"
+    make PREFIX=/usr
+}
+
+package() {
+	cd "${srcdir}/${pkgname}-master"
+	make PREFIX=/usr DESTDIR=${pkgdir} install
+}

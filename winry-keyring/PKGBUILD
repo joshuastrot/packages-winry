@@ -5,11 +5,12 @@
 
 pkgname=winry-keyring
 pkgver=0.1
-pkgrel=2
+pkgrel=5
 pkgdesc='Winry PGP keyring'
 arch=('any')
 url='https://winrylinux.org'
 license=('GPL')
+depends=("winry-system")
 install="${pkgname}.install"
 source=("https://github.com/winry-linux/${pkgname}/archive/master.tar.gz")
 sha256sums=('0a1318bb11c0b485055dbfeb2d87b8a5d73e99539d3cde37065554b45ceced28')

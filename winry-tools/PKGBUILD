@@ -1,0 +1,26 @@
+# Maintainer: Joshua Strot <joshua@winrylinux.org>
+
+pkgname=winry-tools
+pkgver=0.1
+pkgrel=1
+pkgdesc="Tools to assist with development in the Winry Environment"
+arch=('any')
+url="https://github.com/winry-linux/winry-tools"
+license=('GPL')
+depends=('')
+makedepends=('')
+#Temporary source, change to release based in the future
+source=("https://github.com/winry-linux/${pkgname}/archive/master.tar.gz")
+sha256sums=('4668a41ae93144a7ce6a114d1ee23349e30d221c99f1222f40211f055e41e08a')
+
+build() {
+    cd ${srcdir}/winry-tools-master
+    make
+}
+
+package() {
+    cd ${srcdir}/winry-tools-master
+    
+    make install DESTDIR=${pkgdir}
+}
+ 

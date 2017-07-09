@@ -1,7 +1,5 @@
 post_upgrade() {
-    usr/bin/pacman-key -l joshuastrot@gmail.com >/dev/null 2>&1
-
-	if [[ $? != 0 ]]; then
+	if usr/bin/pacman-key -l >/dev/null 2>&1; then
 		usr/bin/pacman-key --populate winry
 	else
 		echo " >>> Run \`pacman-key --init\` to set up your pacman keyring."
