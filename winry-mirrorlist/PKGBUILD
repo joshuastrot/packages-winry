@@ -1,0 +1,19 @@
+# Maintainer: Joshua Strot <joshua@winrylinux.org>
+
+pkgname=winry-mirrorlist
+pkgver=0.1
+pkgrel=1
+pkgdesc="Winry mirrorlist for use by pacman"
+arch=('any')
+url="https://winrylinux.org"
+license=('GPL')
+backup=(etc/pacman.d/winry-mirrorlist)
+source=("https://github.com/winry-linux/${pkgname}/archive/master.tar.gz")
+sha256sums=('8470575b2bd548fb9db098ea4814f6922d992025021ed083ce7171ea6f453ac5')
+
+package() {
+	cd "${srcdir}/${pkgname}-master"
+
+	mkdir -p $pkgdir/etc/pacman.d
+	install -m644 mirrorlist $pkgdir/etc/pacman.d/winry-mirrorlist
+}

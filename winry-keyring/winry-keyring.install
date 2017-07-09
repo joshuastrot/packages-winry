@@ -1,0 +1,17 @@
+post_upgrade() {
+    usr/bin/pacman-key -l joshuastrot@gmail.com >/dev/null 2>&1
+
+	if [[ $? != 0 ]]; then
+		usr/bin/pacman-key --populate winry
+	else
+		echo " >>> Run \`pacman-key --init\` to set up your pacman keyring."
+		echo " >>> Then run \`pacman-key --populate winry\` to install the Winry keyring."
+	fi
+}
+
+post_install() {
+	if [ -x usr/bin/pacman-key ]; then
+		post_upgrade
+	fi
+}
+# -*- mode: bash;-*-
