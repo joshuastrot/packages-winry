@@ -1,24 +1,24 @@
 # Maintainer: Joshua Strot <joshua@winrylinux.org>
 
 pkgname=pinako
-pkgver=0.1
+pkgver=0.1.1
 pkgrel=1
 pkgdesc="Client to control the central repository of Winry Linux"
 arch=('any')
-url="https://github.com/winry-linux/pinako"
+url="https://github.com/winry-linux/${pkgname}"
 license=('GPL')
 depends=('python-yaml' 'python-paramiko')
-makedepends=('')
-source=("https://github.com/winry-linux/${pkgname}/archive/v${pkgver}.tar.gz")
-sha256sums=('a1bbdd56725c3218f55f31290942a2122b969b955c89b244fb303a778233d1d7')
+makedepends=('git')
+source=("git+${url}.git")
+sha256sums=('SKIP')
 
 package() {
   mkdir -p ${pkgdir}/usr/share/pinako
   mkdir -p ${pkgdir}/usr/bin
 
   msg "Copying data over to the pinako directory."
-  cp -r ${srcdir}/pinako-${pkgver}/pinako/* ${pkgdir}/usr/share/pinako
-  cp -r ${srcdir}/pinako-${pkgver}/data ${pkgdir}/usr/share/pinako
+  cp -r ${srcdir}/${pkgname}/pinako/* ${pkgdir}/usr/share/pinako
+  cp -r ${srcdir}/${pkgname}/data ${pkgdir}/usr/share/pinako
 
   msg "Moving the pinako executable"
   mv ${pkgdir}/usr/share/pinako/pinako ${pkgdir}/usr/bin

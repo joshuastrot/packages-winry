@@ -1,20 +1,20 @@
 # Maintainer: Joshua Strot <joshua@winrylinux.org>
 
-pkgname=winry-mirrorlist
+pkgname=winry-profile
 pkgver=$(date +%Y%m%d)
 pkgrel=1
-pkgdesc="Winry mirrorlist for use by pacman"
+pkgdesc='Winry Archiso profile'
 arch=('any')
 url="https://github.com/winry-linux/${pkgname}"
 license=('GPL')
-makedepends=('git')
-backup=(etc/pacman.d/winry-mirrorlist)
+depends=("archiso")
+makedepends=("git")
 source=("git+${url}.git")
 sha256sums=('SKIP')
 
 package() {
+	mkdir -p $pkgdir/usr/share/archiso/configs
+	
 	cd "${srcdir}/${pkgname}"
-
-	mkdir -p $pkgdir/etc/pacman.d
-	install -m644 mirrorlist $pkgdir/etc/pacman.d/winry-mirrorlist
+	cp -r winry $pkgdir/usr/share/archiso/configs
 }
