@@ -1,0 +1,36 @@
+# Maintainer: Joshua Strot <joshua@winrylinux.org>
+# Contributor: Edgard Castro <castro@edgard.org>
+# Contributor: Frederic Bezies <fredbezies at gmail dot com>
+# Contributor: FadeMind <fademind@gmail.com>
+# Contributor: Icaro Perseo <icaroperseo[at]protonmail[dot]com>
+# Contributor: Lucas Saliés Brum <lucas@archlinux.com.br>
+
+pkgname=papirus-icon-theme
+pkgver=20170616
+pkgrel=1
+pkgdesc="Papirus icon theme"
+url="https://github.com/PapirusDevelopmentTeam/${pkgname%-git}"
+arch=('any')
+license=('LGPL3')
+provides=("${pkgname%-git}")
+conflicts=(
+  "${pkgname%-git}"
+  "papirus-gtk-icon-theme"
+  "papirus-gtk-icon-theme-git"
+  "papirus-icon-theme-gtk"
+  "papirus-icon-theme-gtk-git"
+  "papirus-icon-theme-kde"
+  "papirus-icon-theme-kde-git"
+)
+replaces=(
+  "papirus-icon-theme-gtk-git"
+  "papirus-icon-theme-kde-git"
+)
+options=('!strip')
+source=("${url}/archive/${pkgver}.tar.gz")
+sha256sums=('646f5e4bbc4bced59f7e56d3b5b40b0a2e82d58d7a4999218807b94e4f8f06f2')
+
+package() {
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  make DESTDIR="${pkgdir}/" install
+}
