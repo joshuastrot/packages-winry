@@ -1,0 +1,14 @@
+diff --git a/papirus-dark/metadata.desktop b/papirus-dark/metadata.desktop
+index 75dc400..fef9dd4 100644
+--- a/papirus-dark/metadata.desktop
++++ b/papirus-dark/metadata.desktop
+@@ -16,3 +16,9 @@ enabled=false
+ contrast=0.2
+ intensity=0.4
+ saturation=1.7
++
++[Wallpaper]
++defaultWallpaperTheme=MistyForest
++defaultFileSuffix=.jpg
++defaultWidth=1920
++defaultHeight=1080

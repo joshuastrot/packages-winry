@@ -4,7 +4,7 @@
 
 pkgname=papirus-dark-plasma-theme-git
 pkgver=20170126
-pkgrel=1
+pkgrel=2
 pkgdesc="Papirus Dark theme for KDE Plasma 5"
 url="https://github.com/papirus-dark/${pkgname%-git}"
 arch=('any')
@@ -12,12 +12,21 @@ license=('GPL')
 depends=('plasma-desktop')
 makedepends=('git' 'make')
 options=('!strip')
-source=("${pkgname}::git+${url}.git")
-sha256sums=('SKIP')
+source=("${pkgname}::git+${url}.git"
+        "defaultwallpaper.patch"
+)
+sha256sums=('SKIP'
+            '6f95bdb859c456f7df0e756cd2c8ff54dc22ab0894ce743bd261fc620a1d99cf'
+)
 
 pkgver() {
     cd ${pkgname}
     git log -1 --format="%cd" --date=short | tr -d '-'
+}
+
+prepare() {
+    cd ${pkgname}
+    git apply ../defaultwallpaper.patch
 }
 
 package() {

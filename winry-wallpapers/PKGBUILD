@@ -1,21 +1,24 @@
 # Maintainer: Joshua Strot <joshua@winrylinux.org>
 
 pkgname=winry-wallpapers
-pkgver=0.1
+pkgver=$(date +%Y%m%d)
 pkgrel=1
 pkgdesc="Wallpapers for Winry Linux"
 arch=('any')
 url="https://github.com/winry-linux/winry-wallpapers"
 license=('GPL')
 depends=('qt5-base')
-makedepends=('')
-source=("https://github.com/winry-linux/${pkgname}/archive/v${pkgver}.tar.gz")
-sha256sums=('c5fe27a9d11150861e819ae6fcfa22572da4ee2292968aa745f0382d45cf2624')
+makedepends=('git')
+source=("git+${url}.git")
+sha256sums=('SKIP')
 
 package() {
   mkdir -p ${pkgdir}/usr/share/wallpapers
 
   msg "Copying wallpapers over to package directory."
-  cp -r ${srcdir}/${pkgname}-${pkgver}/winry ${pkgdir}/usr/share/wallpapers
+  cp -r ${srcdir}/${pkgname}/* ${pkgdir}/usr/share/wallpapers
+  
+  msg "Cleaning up package directory."
+  rm ${pkgdir}/usr/share/wallpapers/{LICENSE,README.md,CREDITS}
 }
  

@@ -1,0 +1,29 @@
+# Maintainer: Ramon Buldó <ramon@manjaro.org>
+
+pkgname=winry-themes
+pkgver=$(date +%Y%m%d)
+pkgrel=1
+url="https://github.com/winry-linux/${pkgname}"
+arch=('any')
+license=('GPL')
+makedepends=('extra-cmake-modules' 'plasma-framework' 'git')
+source=("git+$url.git")
+md5sums=('SKIP')
+
+prepare() {
+  mkdir -p build
+}
+
+build() {
+  cd build
+  cmake ../${pkgname} \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DKDE_INSTALL_USE_QT_SYS_PATHS=ON
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="${pkgdir}" install
+}
