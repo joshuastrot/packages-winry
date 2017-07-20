@@ -1,32 +1,19 @@
 # Maintainer: Joshua Strot <joshua@winrylinux.org>
 
 pkgname=augur
-pkgver=0.1
+pkgver=0.1.2
 pkgrel=1
 pkgdesc="Utility to monitor updates for packages pulled from AUR"
 arch=('any')
 url="https://github.com/winry-linux/augur"
 license=('GPL')
 depends=('python-yaml' 'python-beautifulsoup4' 'yaml-cpp')
-makedepends=('')
-source=("https://github.com/winry-linux/${pkgname}/archive/v${pkgver}.tar.gz")
-sha256sums=('2a17080a80bac8762e1ea8e62b79699d823df889d50fee7a87c49cbbadd97a6a')
+makedepends=('python-setuptools' 'git')
+source=("${url}/archive/v${pkgver}.tar.gz")
+sha256sums=('b9fa3f91864ccd82b679039eb94e305b2537b501ff36f06769d7c9a8be715872')
 
 package() {
-    msg "Making directories."
-    mkdir -p ${pkgdir}/usr/share/augur
-    mkdir -p ${pkgdir}/usr/bin
-    mkdir -p ${pkgdir}/etc/augur
-
-    msg "Copying data over to the pinako directory."
-    cp -r ${srcdir}/augur-${pkgver}/augur/* ${pkgdir}/usr/share/augur
-    cp -r ${srcdir}/augur-${pkgver}/data/* ${pkgdir}/etc/augur
-
-    msg "Moving the pinako executable"
-    mv ${pkgdir}/usr/share/augur/augur ${pkgdir}/usr/bin
-
-    msg "Making executable"
-    chmod +x ${pkgdir}/usr/bin/augur
-    chmod +x ${pkgdir}/usr/share/augur/augur.py
+    cd ${srcdir}/${pkgname}-${pkgver}
+    python setup.py install --root="${pkgdir}/" --optimize=1
 }
  
